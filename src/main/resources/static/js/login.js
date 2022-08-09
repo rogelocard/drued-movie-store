@@ -21,4 +21,9 @@ async function login() {
 		body: JSON.stringify(data)
 	});
 	const response = await request.text();
+	if(response == 'OK'){
+		window.location.href = 'movie.html'
+	} else {
+		alert("Las credenciales son incorrectas. Por favor intente nuevamente.");
+	}
 }

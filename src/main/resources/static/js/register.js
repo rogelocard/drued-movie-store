@@ -34,44 +34,12 @@ async function registerUser() {
 		headers: getHeaders(),
 		body: JSON.stringify(data)
 	});
-	const response = await request.json();
-	if (response.includes('AGREGADO')) {
-		Swal.fire({
-			icon: 'success',
-			tittle: 'La cuenta fue creada con exito',
-			showConfirmButton: false,
-		});
-		location.reload();
-		
+	const response = await request.text();
+	if(response == 'OK'){
+		window.location.href = 'login.html'
 	} else {
-		//alert('La cuenta fue creada con exito')
-		Swal.fire({
-			icon: 'success',
-			tittle: 'La cuenta fue creada con exito',
-			showConfirmButton: false,
-		});
+		alert("El usuario fue creado exitosamente");
+		window.location.href = 'login.html'
 	}
-	// } else {
-	// 	if (response.includes('usuarios.UK_dqepd9dx5ubsh89wj99uimqw')) {
-	// 		Swal.fire({
-	// 			icon: 'error',
-	// 			tittle: 'Oops...',
-	// 			text: 'El nombre de usuario ya esta en uso'
-	// 		});
-	// 	}
-	// 	if (response.includes('usuarios.UK_t9qm9g9sbjvhupwktuwdr499w')) {
-	// 		Swal.fire({
-	// 			icon: 'error',
-	// 			tittle: 'Oops...',
-	// 			text: 'La cedula ya se encuentra registrada'
-	// 		});
-	// 	}
-	// 	if (response.includes('usuarios.UK_bdp41y8e8un0nsxowhgsl783s')) {
-	// 		Swal.fire({
-	// 			icon: 'error',
-	// 			tittle: 'Oops...',
-	// 			text: 'El correo ya se encuentra registrado',
-	// 		});
-	// 	}
-	// }
+
 }

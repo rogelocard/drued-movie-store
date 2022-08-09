@@ -3,6 +3,9 @@ package com.ssc.druedmoviestore.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +25,12 @@ public class UserService {
 	
 	@Autowired
 	private IUserRepository userRepository;
+	
+	/**
+	 * The Entity Manager class allows us to use SQl queries when needed
+	 */
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	// Method to post/save a new user. 
 	public User addUser (User user) {
@@ -55,5 +64,21 @@ public class UserService {
 		
 		User updatedUser = userRepository.save(user);
 		return updatedUser;
+	}
+	
+	/**
+	 * Method to validate if the credentials entered are the same on the database
+	 * @param user
+	 * @return
+	 */
+	public boolean verifyCredentials(User user) {
+		String query = "FROM User WHERE username = :username AND password = :password";
+		//String query = "Select username = :username AND password = :password FROM User";
+		List<User> list = entityManager.createQuery(query)
+					.setParameter("username", user.getUsername())
+					.setParameter("password", user.getPassword())
+					.getResultList();
+		
+		return !list.isEmpty();
 	}
 }
