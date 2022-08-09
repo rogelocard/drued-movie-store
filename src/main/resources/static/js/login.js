@@ -25,5 +25,5 @@ async function login() {
 		window.location.href = 'movie.html'
 	} else {
 		alert("Las credenciales son incorrectas. Por favor intente nuevamente.");
-	}
+	};
 }

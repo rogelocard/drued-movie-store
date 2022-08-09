@@ -78,7 +78,6 @@ public class UserService {
 					.setParameter("username", user.getUsername())
 					.setParameter("password", user.getPassword())
 					.getResultList();
-		
 		return !list.isEmpty();
 	}
 }
