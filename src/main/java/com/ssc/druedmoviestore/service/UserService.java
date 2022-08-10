@@ -15,6 +15,9 @@ import com.ssc.druedmoviestore.exception.ResourceNotFoundException;
 import com.ssc.druedmoviestore.model.User;
 import com.ssc.druedmoviestore.repository.IUserRepository;
 
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
+
 /**
  * This method handles the business logic and uses the user repository to  
  * provide a service that can be called from other classes.
@@ -72,12 +75,20 @@ public class UserService {
 	 * @return
 	 */
 	public boolean verifyCredentials(User user) {
-		String query = "FROM User WHERE username = :username AND password = :password";
-		//String query = "Select username = :username AND password = :password FROM User";
+		String query = "FROM User WHERE username = :username";
 		List<User> list = entityManager.createQuery(query)
 					.setParameter("username", user.getUsername())
-					.setParameter("password", user.getPassword())
 					.getResultList();
-		return !list.isEmpty();
+		
+		if (list.isEmpty()) {
+			return false;
+		}
+		
+		String passwordHashed = list.get(0).getPassword();
+		
+		Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+		// Verify() = Method to compare the password hash we have store in the database with the one we get in the front as a request. 
+		return argon2.verify(passwordHashed, user.getPassword()); 
+		
 	}
 }

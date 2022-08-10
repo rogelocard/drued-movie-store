@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Movie</title>
+    <!-- Custom styles for this template -->
+	<link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+		integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+    <h1 style="text-align: center; margin-top: 25px;">Añadir Pelicula </h1>
+
+      <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-10 col-md-8 col-lg-6">
+                <!-- Form -->
+                <form class="form-example" action="" method="post">
+                    <br>
+                
+                    <p class="description">Añade una pelicula a la lista, por favor llenar todos los campos.</p>
+                    <!-- Input fields -->
+                    <div class="form-group">
+                        <label for="txtNameMovie" style="font-weight:bold">Nombre Pelicula:</label>
+                        <input type="text" class="form-control username" id="txtNameMovie" placeholder="Nombre pelicula..." name="nameMovie">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtGenre" style="font-weight:bold">Genero:</label>
+                        <input type="text" class="form-control password" id="txtGenre" placeholder="Genero..." name="genre">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDirector" style="font-weight:bold">Director:</label>
+                        <input type="text" class="form-control password" id="txtDirector" placeholder="Director..." name="director">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtInStock" style="font-weight:bold">Cantidad disponibles:</label>
+                        <input type="text" class="form-control password" id="txtInStock" placeholder="Cantidad disponibles..." name="stock">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPrice" style="font-weight:bold">Precio:</label>
+                        <input type="text" class="form-control password" id="txtPrice" placeholder="Precio..." name="precio">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDescription" style="font-weight:bold">Descripción:</label>
+                        <input type="text" class="form-control password" id="txtDescription" placeholder="pequeña descripcion..." name="description">
+                    </div>
+                    <button  type="submit" class="btn btn-success col-auto" onclick="addMovie()">Registrar</button>
+                    <a href="movie.html"><button type="button" class="btn btn-secondary">Cancelar</button></a>
+                </form>
+                <!-- Form end -->
+            </div>
+        </div>
+    </div>
+    <script src="js/registerMovie.js"></script>
+</body>
+</html>

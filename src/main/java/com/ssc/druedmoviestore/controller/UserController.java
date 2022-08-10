@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssc.druedmoviestore.model.User;
 import com.ssc.druedmoviestore.service.UserService;
 
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
+
 /**
  * Controller used to redirect a user's petition to a user business logic
  * @author Rosh
@@ -35,7 +38,12 @@ public class UserController {
 	//Function to create an API that will allow to post an object User through the URL
 	@PostMapping ("/guardar")
 	public ResponseEntity<User> saveUser (@RequestBody User user){
-		// Temporal movie = movie1
+		//Instructions to hash the password and encrypt it in the database. 
+		Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+		String hash = argon2.hash(1, 1024, 1, user.getPassword());
+		user.setPassword(hash);
+
+		// Temporal user = user1
 		User user1 = userService.addUser(user);
 		
 		try {
